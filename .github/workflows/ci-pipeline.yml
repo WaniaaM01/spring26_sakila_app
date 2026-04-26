@@ -106,6 +106,8 @@ jobs:
           mysql -h 127.0.0.1 -u root -padmin -e "SHOW TABLES FROM sakila;"
 
       - name: Run pytest
+    env:
+      PYTHONPATH: .
         run: pytest tests/ -v
 
   # ────────────────────────────────────────────────
