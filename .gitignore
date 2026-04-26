@@ -37,4 +37,8 @@ instance/
 
 # Claude Code
 .claude/
-CLAUDE.md
+CLAUDE.md.env
+sakila-data.sql
+sakila-schema.sql
+sakila.tar.gz
+sakila-db/
