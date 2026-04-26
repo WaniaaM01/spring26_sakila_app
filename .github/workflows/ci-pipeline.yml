@@ -2,9 +2,9 @@ name: CI Pipeline
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main, develop, feature/docker-optimization]
   pull_request:
-    branches: [main]
+    branches: [main, feature/docker-optimization]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

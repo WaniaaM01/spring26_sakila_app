@@ -3,7 +3,7 @@ name: Broken CI Pipeline
 # FIX 1: Indented push: and branches: under on: correctly
 on:
   push:
-    branches: [main]
+    branches: [main, feature/docker-optimization]
 
 jobs:
   test:
