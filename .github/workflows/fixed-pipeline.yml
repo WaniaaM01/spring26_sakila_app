@@ -1,0 +1,42 @@
+name: Broken CI Pipeline
+
+# FIX 1: Indented push: and branches: under on: correctly
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    # FIX 2: Changed 'ubuntu' (invalid) to 'ubuntu-latest' (valid GitHub-hosted runner)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.9
+      - name: Install deps
+        run: |
+          pip install -r requirements.txt
+          pip install pytest
+      - name: Run Tests
+        run: pytest tests/ -v
+
+  build:
+    runs-on: ubuntu-latest
+    # FIX 3: Added 'needs: test' so build only runs after test passes
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Image
+        run: docker build -t myapp .
+
+  deploy:
+    runs-on: ubuntu-latest
+    # FIX 4: Changed 'needs: test' to 'needs: build' — deploy should follow build, not bypass it
+    needs: build
+    # FIX 5: Wrapped condition in ${{ }} expression syntax required by GitHub Actions
+    if: ${{ github.ref == 'refs/heads/main' }}
+    steps:
+      - name: Deploy
+        run: echo Deploying...
