@@ -41,7 +41,7 @@ jobs:
       - run: |
           docker build -t sakila-app:${{ github.sha }} .
           docker run -d --name smoke -p 5000:5000 sakila-app:${{ github.sha }}
-          sleep 10 && curl -f http://localhost:5000 || echo "App Started"
+          sleep 10 && curl -f http://localhost:5000 || echo "Started"
   security-scan:
     needs: build
     runs-on: ubuntu-latest
@@ -54,8 +54,7 @@ jobs:
           format: "table"
           output: "trivy-report.txt"
           exit-code: "0"
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: trivy-security-report
           path: trivy-report.txt
