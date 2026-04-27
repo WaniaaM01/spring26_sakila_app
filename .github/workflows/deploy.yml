@@ -65,11 +65,11 @@ jobs:
 
       - name: Write Job Summary
         run: |
-          echo "## 🚀 Staging Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "##  Staging Deployment Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "| Field | Value |" >> $GITHUB_STEP_SUMMARY
           echo "|-------|-------|" >> $GITHUB_STEP_SUMMARY
-          echo "| **Status** | ✅ Success |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Status** |  Success |" >> $GITHUB_STEP_SUMMARY
           echo "| **Environment** | Staging |" >> $GITHUB_STEP_SUMMARY
           echo "| **Image** | \`${{ env.IMAGE_NAME }}:staging-${{ github.sha }}\` |" >> $GITHUB_STEP_SUMMARY
           echo "| **Branch** | \`${{ github.ref_name }}\` |" >> $GITHUB_STEP_SUMMARY
@@ -82,7 +82,7 @@ jobs:
 
       - name: Notify — Staging deployment
         run: |
-          echo "📣 Slack notification: Deployment to staging successful!"
+          echo " Slack notification: Deployment to staging successful!"
           echo "   Commit: ${{ github.sha }}"
           echo "   Actor:  ${{ github.actor }}"
 
@@ -120,7 +120,7 @@ jobs:
           echo "Timestamp:   $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           echo ""
           echo "Production deployment simulation complete."
-          echo "✅ Application is live in production!"
+          echo " Application is live in production!"
 
       - name: Create GitHub Release
         uses: actions/github-script@v7
@@ -149,7 +149,7 @@ jobs:
 
       - name: Notify — Production deployment
         run: |
-          echo "📣 Slack notification: Deployment to production successful!"
+          echo "Slack notification: Deployment to production successful!"
           echo "   Commit: ${{ github.sha }}"
           echo "   Actor:  ${{ github.actor }}"
-          echo "   🎉 Production is live!"
+          echo "  Production is live!"
